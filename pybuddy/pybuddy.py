@@ -5,7 +5,6 @@ import pkg_resources
 from xblock.core import XBlock
 from xblock.fields import Scope, Integer
 from xblock.fragment import Fragment
-from django.http import JsonResponse, HttpRequest
 from pylint import lint
 from astroid import MANAGER
 from pylint.reporters.text import TextReporter
@@ -121,8 +120,8 @@ class PythonBuddyXBlock(XBlock):
         cmd = 'python error_test.py'
         p = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
         output = p.stdout.read()
-        print "output" + output
-        return JsonResponse(output)
+
+        return output
 
     # TO-DO: change this to create the scenarios you'd like to see in the
     # workbench while developing your XBlock.
