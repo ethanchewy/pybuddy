@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+
+<body>
+<!--<textarea data-lang="python" id="txt">print "hello world"</textarea>-->
+<div class="text-center" id ="info">
+    <h1>Python Linter Online</h1>
+    <i>Live Syntax Checking Using Pylint while Running Python </i>
+    <p>
+        Examples:
+        <a href="#" id="codeexample1">1</a>
+        <a href="#" id="codeexample2">2</a>
+        <a href="#" id="codeexample3">3</a>
+        <a href="#" id="codeexample5">5</a>
+        <a href="#" id="codeexample6">6</a>
+        <a href="#" id="codeexample7">7</a>
+    </p>
+</div>
+<br>
+<div class="container">
+    <textarea id="txt">
+methods = []                       
+for i in range(10):                        
+    methodds.append(lambda x: x + i)        
+
+print methods[0](10)
+    </textarea>
+    <br>
+    <button type="button" id="run">Run</button> 
+    <div id="output" >
+        <pre></pre>
+    </div> 
+    <br>
+    <div id="append_text">
+        <h2>Pylint Output Info</h2>
+        <table id="errorslist" style="display: inline-block;">
+            <tr>
+                <th>Line</th>
+                <th>Severity</th>
+                <th>Error</th>
+                <th>More Info</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<br>
+<footer>
+Created by Ethan Chiu. Source Code: <a href="https://github.com/ethanchewy/PythonBuddy">https://github.com/ethanchewy/PythonBuddy</a>
+</footer>
+</body>
+</html>
