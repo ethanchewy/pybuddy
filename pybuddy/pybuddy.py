@@ -3,8 +3,9 @@
 import pkg_resources
 
 from xblock.core import XBlock
-from xblock.fields import Scope, Integer
+from xblock.fields import Scope, String, Dict, Float, Boolean, Integer
 from xblock.fragment import Fragment
+#from .utils import _, DummyTranslationService, FeedbackMessage, FeedbackMessages, ItemStats, StateMigration, Constants
 from pylint import lint
 from astroid import MANAGER
 from pylint.reporters.text import TextReporter
@@ -19,15 +20,54 @@ class PythonBuddyXBlock(XBlock):
     # self.<fieldname>.
 
     # TO-DO: delete count, and define your own fields.
+    '''
     count = Integer(
         default=0, scope=Scope.user_state,
         help="A simple counter, to show something happening",
+    )
+    '''
+
+    #Set fields for teacher's to customize the problem
+    data = Dict(
+        display_name=("Problem data"),
+        help=(
+            "Information about zones, items, feedback, and background image for this problem. "
+            "This information is derived from the input that a course author provides via the interactive editor "
+            "when configuring the problem."
+        ),
+        scope=Scope.content,
+        default="",
+    )
+
+
+    max_attempts = Integer(
+        display_name=("Maximum attempts"),
+        help=(
+            "Defines the number of times a student can try to answer this problem. "
+            "If the value is not set, infinite attempts are allowed."
+        ),
+        scope=Scope.settings,
+        default=None,
+    )
+
+    question_text = String(
+        display_name=("Problem text"),
+        help=("The description of the problem or instructions shown to the learner."),
+        scope=Scope.settings,
+        default="",
     )
 
     def resource_string(self, path):
         """Handy helper for getting resources from our kit."""
         data = pkg_resources.resource_string(__name__, path)
         return data.decode("utf8")
+
+    def get_configuration(self):
+        """
+        Get the configuration data for the student_view.
+        The configuration is all the settings defined by the author, except for correct answers
+        and feedback.
+        """
 
     # TO-DO: change this view to display your data your own way.
     def student_view(self, context=None):
