@@ -28,33 +28,59 @@ class PythonBuddyXBlock(XBlock):
     '''
 
     #Set fields for teacher's to customize the problem
-    data = Dict(
-        display_name=("Problem data"),
-        help=(
+    #Instructor has to type &#10; for new line, &#009; for new tab
+    data = String(
+        display_name="Problem data",
+        help=
             "Information about zones, items, feedback, and background image for this problem. "
             "This information is derived from the input that a course author provides via the interactive editor "
             "when configuring the problem."
-        ),
+        ,
         scope=Scope.content,
-        default="",
+        default="asdfasdfasdfasdf",
     )
 
 
     max_attempts = Integer(
-        display_name=("Maximum attempts"),
-        help=(
+        display_name="Maximum attempts",
+        help=
             "Defines the number of times a student can try to answer this problem. "
             "If the value is not set, infinite attempts are allowed."
-        ),
+        ,
         scope=Scope.settings,
         default=None,
     )
 
     question_text = String(
-        display_name=("Problem text"),
-        help=("The description of the problem or instructions shown to the learner."),
+        display_name="Problem text",
+        help="The description of the problem or instructions shown to the learner.",
         scope=Scope.settings,
         default="",
+    )
+
+    weight = Float(
+        display_name="Problem Weight",
+        help="Defines the number of points the problem is worth.",
+        scope=Scope.settings,
+        default=1,
+    )
+
+    attempts = Integer(
+        help="Number of attempts learner used",
+        scope=Scope.user_state,
+        default=0
+    )
+
+    completed = Boolean(
+        help="Indicates whether a learner has completed the problem at least once",
+        scope=Scope.user_state,
+        default=False,
+    )
+
+    grade = Float(
+        help="Keeps maximum score achieved by student",
+        scope=Scope.user_state,
+        default=0
     )
 
     def resource_string(self, path):
@@ -68,6 +94,8 @@ class PythonBuddyXBlock(XBlock):
         The configuration is all the settings defined by the author, except for correct answers
         and feedback.
         """
+
+
 
     # TO-DO: change this view to display your data your own way.
     def student_view(self, context=None):
@@ -170,7 +198,8 @@ class PythonBuddyXBlock(XBlock):
         """A canned scenario for display in the workbench."""
         return [
             ("PythonBuddyXBlock",
-             """<pybuddy/>
+             """<pybuddy data="for i in range(5):&#10;&#009;print i"
+                max_attempts="3"/>
              """),
             ("Multiple PythonBuddyXBlock",
              """<vertical_demo>

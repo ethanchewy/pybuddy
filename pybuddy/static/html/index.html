@@ -19,14 +19,13 @@
 <br>
 <div class="container">
     <textarea id="txt">
-methods = []                       
-for i in range(10):                        
-    methodds.append(lambda x: x + i)        
-
-print methods[0](10)
+{self.data}
     </textarea>
     <br>
     <button type="button" id="run">Run</button> 
+    <br>
+    <span> Max Attempts: {self.max_attempts}</span>
+    <button type="button" id="submit">Submit</button> 
     <div id="output" >
         <pre></pre>
     </div> 
